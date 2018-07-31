@@ -1,4 +1,5 @@
 # myschedule
+
 My schedule, also your schedule. It is our schedule.
 
 ## Configuration
@@ -13,10 +14,12 @@ My schedule, also your schedule. It is our schedule.
 
 Inherit the following classes.
 Task: a task
-ToDoList: todo list
+ToDoList: todo list, list of Task
 
 * To create the your own html form, override method `report`
 * If you save 'todolist.txt' in another path, you have to set it to argument `path` of `read` method
+* Method `__format__` controls the form of a task
 
 ## Framework
+
 [pyubersicht](https://github.com/Freakwill/pyubersicht)
