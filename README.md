@@ -7,6 +7,8 @@ My schedule, also your schedule. It is our schedule.
 * Edit it, create a task in the form '14:10-15:00, study' (there is an example)
 * start up the wigdet.
   
+'14:10-15:55, study' == '14:10, study', since the default duration == 45min.
+  
 ## Hicking
 
 Inherit the following classes.
@@ -14,7 +16,7 @@ Task: a task
 ToDoList: todo list
 
 * To create the your own html form, override method `report`
-* If you save 'todolist.txt' in other path, you have to set it to argument `path` of `read` method
+* If you save 'todolist.txt' in another path, you have to set it to argument `path` of `read` method
 
 ## Framework
 [pyubersicht](https://github.com/Freakwill/pyubersicht)
