@@ -2,6 +2,11 @@
 
 My schedule, also your schedule. It is our schedule.
 
+## Featrues
+
+* display the tasks dynamically, currently, only the running task and comming task are shown
+* build heavily on python instead of javascript/coffeescript
+
 ## Configuration
 
 * Create 'todolist.txt' under '/Users/<username>'
