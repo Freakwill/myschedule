@@ -14,5 +14,5 @@ args = parser.parse_args()
 output = args.output
 domEl = args.domEl
 
-todolist = script.ToDoList.read('~/todolist.txt')
+todolist = script.todolist
 print(todolist.report())

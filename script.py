@@ -87,6 +87,14 @@ class ToDoList(list):
 
     quote = 'Control Yourself'
 
+    @property
+    def tasks(self):
+        return self.data
+
+    @tasks.setter
+    def tasks(self, data):
+        self.data = data
+
     @staticmethod
     def parse(s:str):
         return ToDoList([Task.parse(todo) for todo in s.split('\n') if todo.strip() and not todo.startswith('#')])
@@ -122,8 +130,10 @@ class ToDoList(list):
     def have_a_rest(self):
         return not self.running_task
 
+    def del_past_tasks(self):
+        self.data = [task for task in self.data if task.end > pendulum.now()]
+
     def report(self):
-        head = '<h1>TO DO LIST</br>(%s)</h1>' % pendulum.now().to_date_string()
         lst = '<ul>'
         if self.running_task:
             lst = '<li class="running">{rt}</li>\n'.format(rt=self.running_task)
@@ -134,9 +144,8 @@ class ToDoList(list):
         else:
             lst += '<li class="rest">No more tasks. Have a long rest.</li>'
         lst += '</ul>'
-        return '<html>\n%s\n<div class="list">%s</div>\n</br><div class="quote">%s</div></html>' % (head, lst, ToDoList.quote)
+        return '<div class="list">%s</div>\n</br><div class="quote">%s</div>' % (lst, ToDoList.quote)
 
+todolist = ToDoList.read('~/todolist.txt')
 if __name__ == '__main__':
-
-    todolist = ToDoList.read('~/todolist.txt')
     print(todolist.report())

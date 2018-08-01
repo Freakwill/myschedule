@@ -1,16 +1,21 @@
 
 command: "python3 myschedule/script.py"
 
-render: (output) -> """
-#{output}
-"""
+render: (output) ->
+  today = new Date()
+  """
+  <html><h1>TO DO LIST</br>(#{today.toLocaleString()})</h1>#{output}</html>
+  """
 
-update: (output, domEl) -> """
-
-newout = 'Default Output'
-exec "python3 /Users/william/Library/Application Support/Übersicht/widgets/myschedule/update.py -o output -d domEl", (err, stdout, stderr) -> newout=stdout
-
-"""
+# update: (output, domEl) ->
+#   exec: (a, b) ->
+#     cp = require('child_process')
+#     cp.exec a b
+#   exec "python3 /Users/william/Library/Application Support/Übersicht/widgets/myschedule/update.py -o output -d domEl", (err, stdout, stderr) -> output=stdout
+#   today = new Date()
+#   output = """
+#   <html><h1>TO DO LIST</br>(#{today.toLocaleString()})</h1>#{output}</html>
+#   """
 
 style: """
   top: 30%
@@ -58,4 +63,4 @@ style: """
     text-align: center
 """
 
-refreshFrequency: 1000*1000
+refreshFrequency: 1000*600
