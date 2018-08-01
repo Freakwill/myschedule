@@ -2,7 +2,7 @@
 
 My schedule, also your schedule. It is our schedule.
 
-![](blob/master/screenshot.png)
+![](https://github.com/Freakwill/myschedule/blob/master/screenshot.png)
 
 ## Featrues
 
