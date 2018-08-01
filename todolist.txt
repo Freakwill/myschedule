@@ -1,7 +1,32 @@
 # todo list
 
-14:30-15:00, study funds
-15:30-16:30, learn something or read a book
-17:00-18:30, surf online
-18:50, surf online
-19:00-20:00, watch movies
+## morming
+
+7:00-7:20, get up
+7:20-7:50, do exercise
+7:50-8:00, take breakfast
+8:30-9:00, learning English
+9:30-11:00, study
+
+## noon
+
+11:30-12:00, have lunch
+
+## afternoon
+13:00-13:30, learning English
+14:00-16:00, study
+16:30-17:00, read a book
+16:45-17:15, do exercise
+
+## dusk
+
+17:30-18:00, have supper
+
+## evening
+
+19:00-20:15, watch movies
+20:30, surf online
+
+## night
+
+22:00, go to bed

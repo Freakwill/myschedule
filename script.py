@@ -48,11 +48,11 @@ class Task(object):
             else:
                 end = self.end.to_datetime_string()
         if spec == 'prepare':
-            return 'To prepare task: %s [%s ~ %s]!' % (begin, end, self.name)
+            return 'To prepare task: %s [%s ~ %s]!' % (self.name, begin, end)
         elif spec == 'finished':
-            return 'Finished task: %s [%s ~ %s]?' % (begin, end, self.name)
+            return 'Finished task: %s [%s ~ %s]?' % (self.name, begin, end)
         else:
-            return 'Started task: %s [%s ~ %s].' % (begin, end, self.name)
+            return 'Started task: %s [%s ~ %s].' % (self.name, begin, end)
 
     def in_1day(self):
         return self.begin.date() == self.end.date()
