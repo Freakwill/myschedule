@@ -2,8 +2,6 @@
 
 My schedule, also your schedule. It is our schedule.
 
-![](https://github.com/Freakwill/myschedule/blob/master/screenshot.png)
-
 ## Featrues
 
 * display the tasks dynamically, currently, only the running task and comming task are shown
