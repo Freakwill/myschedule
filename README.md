@@ -13,9 +13,9 @@ My schedule, also your schedule. It is our schedule.
 * Edit it, create a task in the form '14:10-15:00, study' (there is an example)
 * start up the wigdet.
   
-'14:10-15:55, study' == '14:10, study', since the default duration == 45min.
+'14:10-14:55, study' == '14:10, study', since the default duration == 45min.
   
-## Hicking
+## Hacking
 
 Inherit the following classes.
 Task: a task
