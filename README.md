@@ -27,4 +27,4 @@ ToDoList: todo list, list of Task
 
 ## Framework
 
-[pyubersicht](https://github.com/Freakwill/pyubersicht)
+It was built by [pyubersicht](https://github.com/Freakwill/pyubersicht).
