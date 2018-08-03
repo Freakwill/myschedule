@@ -6,6 +6,7 @@ My schedule, also your schedule. It is our schedule.
 
 * display the tasks dynamically, currently, only the running task and comming task are shown
 * build heavily on python instead of javascript/coffeescript (update.py will be ignored)
+* support serielization
 
 ## Configuration
 
