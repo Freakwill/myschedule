@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-import pendulum
 import pathlib
+import pickle
+
+import pendulum
 
 
 _DefualtDuration = 45    # 45 minutes
@@ -74,6 +76,13 @@ class Task(object):
     def is_running(self):
         return self.begin <= pendulum.now() < self.end
 
+    def __getstate__(self):
+        return self.name, self.begin.to_datetime_string(), self.end.to_datetime_string()
+
+    def __setstate__(self, state):
+        name, begin, end = state
+        self.name, self.begin, self.end = name, pendulum.parse(begin, tz='local'), pendulum.parse(end, tz='local')
+
 
 class ToDoList(list):
     '''To do list
@@ -89,11 +98,11 @@ class ToDoList(list):
 
     @property
     def tasks(self):
-        return self.data
+        return self[:]
 
     @tasks.setter
-    def tasks(self, data):
-        self.data = data
+    def tasks(self, tasks):
+        self[:] = tasks
 
     @staticmethod
     def parse(s:str):
@@ -131,7 +140,15 @@ class ToDoList(list):
         return not self.running_task
 
     def del_past_tasks(self):
-        self.data = [task for task in self.data if task.end > pendulum.now()]
+        for task in self:
+            if task.end > pendulum.now():
+                self.remove(task)
+
+    def __getstate__(self):
+        return self.tasks
+
+    def __setstate__(self, tasks):
+        self.tasks = tasks
 
     def report(self):
         lst = '<ul>'
@@ -146,6 +163,20 @@ class ToDoList(list):
         lst += '</ul>'
         return '<div class="list">%s</div>\n</br><div class="quote">%s</div>' % (lst, ToDoList.quote)
 
-todolist = ToDoList.read('~/todolist.txt')
+    @staticmethod
+    def load(fname='todolist'):
+        pklPath = pathlib.Path('../%s.pkl' % fname)
+        if pklPath.exists():
+            with open(pklPath, 'rb') as fo:
+                todolist = pickle.load(fo)
+        else:
+            todolist = ToDoList.read(pikPath.with_suffix('.txt'))
+            with open(pklPathe, 'wb') as fo:
+                pickle.dump(todolist, fo)
+        return todolist
+
+
+todolist = ToDoList.load()
+
 if __name__ == '__main__':
     print(todolist.report())
