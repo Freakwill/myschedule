@@ -2,9 +2,9 @@
 command: "python3 myschedule/script.py"
 
 render: (output) ->
-  today = new Date()
+
   """
-  <html><h1>TO DO LIST</br>(#{today.toLocaleString()})</h1>#{output}</html>
+  <html><h1>TO DO LIST</br><hr /></h1>#{output}</html>
   """
 
 # update: (output, domEl) ->
@@ -51,7 +51,7 @@ style: """
 
   .comming
     font-size: 18px
-    color: orange
+    color: brown
 
   .rest
     font-size: 18px
@@ -63,4 +63,4 @@ style: """
     text-align: center
 """
 
-refreshFrequency: 1000*600
+refreshFrequency: '900s'

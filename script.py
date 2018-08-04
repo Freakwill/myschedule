@@ -151,13 +151,17 @@ class ToDoList(list):
         self.tasks = tasks
 
     def report(self):
-        lst = '<ul>'
+        now = pendulum.now()
+        lst = '<div class="time">%s </div><ul>' % now.format('YYYY-MM-DD dddd')
         if self.running_task:
-            lst = '<li class="running">{rt}</li>\n'.format(rt=self.running_task)
+            lst += '<li class="running">{rt}</li>\n'.format(rt=self.running_task)
         else:
-            lst = '<li class="rest">Have a rest, take a coffee.</li>\n'
+            lst += '<li class="rest">Have a rest, take a coffee.</li>\n'
         if self.comming_task:
-            lst += '<li class="comming">{ct:prepare}</li>'.format(ct=self.comming_task)
+            if (self.comming_task.begin - now).total_minutes() > 90:
+                lst += '<li class="comming">{ct:prepare} (Don\'t hurry.)</li>'.format(ct=self.comming_task)
+            else:
+                lst += '<li class="comming">{ct:prepare}</li>'.format(ct=self.comming_task)
         else:
             lst += '<li class="rest">No more tasks. Have a long rest.</li>'
         lst += '</ul>'
@@ -166,12 +170,13 @@ class ToDoList(list):
     @staticmethod
     def load(fname='todolist'):
         pklPath = pathlib.Path('../%s.pkl' % fname)
+        txtPath = pathlib.Path('~/%s.txt' % fname).expanduser()
         if pklPath.exists():
             with open(pklPath, 'rb') as fo:
                 todolist = pickle.load(fo)
         else:
-            todolist = ToDoList.read(pikPath.with_suffix('.txt'))
-            with open(pklPathe, 'wb') as fo:
+            todolist = ToDoList.read(txtPath)
+            with open(pklPath, 'wb') as fo:
                 pickle.dump(todolist, fo)
         return todolist
 
