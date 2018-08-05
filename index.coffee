@@ -38,6 +38,7 @@ style: """
   width: 250px
 
   h1
+    font-family: serif
     font-size: 20px
     font-weight: 300
     text-align: center
