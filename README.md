@@ -6,7 +6,7 @@ My schedule, also your schedule. It is our schedule.
 
 * display the tasks dynamically, currently, only the running task and comming task are shown
 * build heavily on python instead of javascript/coffeescript (update.py will be ignored)
-* support serielization
+* support serielization (using pickle)
 
 ## Configuration
 
@@ -25,6 +25,7 @@ ToDoList: todo list, list of Task
 * To create the your own html form, override method `report`
 * If you save 'todolist.txt' in another path, you have to set it to argument `path` of `read` method in script.py
 * Method `__format__` controls the form of a task
+* Write down your own motto in index.coffee
 
 ## Framework
 
