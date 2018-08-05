@@ -1,10 +1,14 @@
 
 command: "python3 myschedule/script.py"
 
+
 render: (output) ->
+  quote = "Discipline is the bridge between goals and accomplishmens."
 
   """
-  <html><h1>TO DO LIST</br><hr /></h1>#{output}</html>
+  <html><h1>TO DO LIST<hr /></h1>#{output}</html>
+  <hr />
+  <div class="quote">#{quote}</div>
   """
 
 # update: (output, domEl) ->

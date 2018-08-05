@@ -77,7 +77,7 @@ class Task(object):
         return self.begin <= pendulum.now() < self.end
 
     def __getstate__(self):
-        return self.name, self.begin.to_datetime_string(), self.end.to_datetime_string()
+        return self.name, self.begin.to_time_string(), self.end.to_time_string()
 
     def __setstate__(self, state):
         name, begin, end = state
@@ -95,14 +95,6 @@ class ToDoList(list):
     '''
 
     quote = 'Control Yourself'
-
-    @property
-    def tasks(self):
-        return self[:]
-
-    @tasks.setter
-    def tasks(self, tasks):
-        self[:] = tasks
 
     @staticmethod
     def parse(s:str):
@@ -130,11 +122,11 @@ class ToDoList(list):
         '''
         return [task for task in self if task.begin > fromWhen]
 
-    @property
-    def comming_task(self):
+    def comming_task(self, fromWhen=pendulum.now()):
         # Get the comming task
-        if self.future_tasks():
-            return min(self.future_tasks(), key=lambda t: t.begin)
+        tasks = self.future_tasks(fromWhen)
+        if tasks:
+            return min(tasks, key=lambda t: t.begin)
 
     def have_a_rest(self):
         return not self.running_task
@@ -145,10 +137,10 @@ class ToDoList(list):
                 self.remove(task)
 
     def __getstate__(self):
-        return self.tasks
+        return self
 
     def __setstate__(self, tasks):
-        self.tasks = tasks
+        self[:] = tasks
 
     def report(self):
         now = pendulum.now()
@@ -157,24 +149,24 @@ class ToDoList(list):
             lst += '<li class="running">{rt}</li>\n'.format(rt=self.running_task)
         else:
             lst += '<li class="rest">Have a rest, take a coffee.</li>\n'
-        if self.comming_task:
-            if (self.comming_task.begin - now).total_minutes() > 90:
-                lst += '<li class="comming">{ct:prepare} (Don\'t hurry.)</li>'.format(ct=self.comming_task)
+        if self.comming_task():
+            if (self.comming_task().begin - now).total_minutes() > 90:
+                lst += '<li class="comming">{ct:prepare} (Don\'t hurry.)</li>'.format(ct=self.comming_task())
             else:
-                lst += '<li class="comming">{ct:prepare}</li>'.format(ct=self.comming_task)
+                lst += '<li class="comming">{ct:prepare}</li>'.format(ct=self.comming_task())
         else:
             lst += '<li class="rest">No more tasks. Have a long rest.</li>'
         lst += '</ul>'
-        return '<div class="list">%s</div>\n</br><div class="quote">%s</div>' % (lst, ToDoList.quote)
+        return '<div class="list">%s</div>' % lst
 
     @staticmethod
     def load(fname='todolist'):
-        pklPath = pathlib.Path('../%s.pkl' % fname)
-        txtPath = pathlib.Path('~/%s.txt' % fname).expanduser()
+        pklPath = pathlib.Path('./%s.pkl' % fname)
         if pklPath.exists():
             with open(pklPath, 'rb') as fo:
                 todolist = pickle.load(fo)
         else:
+            txtPath = pathlib.Path('~/%s.txt' % fname).expanduser()
             todolist = ToDoList.read(txtPath)
             with open(pklPath, 'wb') as fo:
                 pickle.dump(todolist, fo)
