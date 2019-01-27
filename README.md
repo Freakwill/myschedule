@@ -27,6 +27,10 @@ ToDoList: todo list, list of Task
 * Method `__format__` controls the form of a task
 * Write down your own motto in index.coffee
 
+## Screenshot
+
+![](https://github.com/Freakwill/myschedule/blob/master/screenshot.png)
+
 ## Framework
 
 It was built by [pyubersicht](https://github.com/Freakwill/pyubersicht).
